@@ -1,0 +1,78 @@
+{% comment %} We use base.html page to add the code for creating our navigation bar, we will just include this page in our other template,
+let's create our navigation bar, we will use bootstrap. 1st include the 3 links in head tag, f you don't want to download and host 
+Bootstrap yourself, you can include it from a CDN (Content Delivery Network). MaxCDN provides CDN support for Bootstrap's CSS and 
+JavaScript. You must also include jQuery:, we went to the bootstrap website or W3school, copied & pasted the link here, to be able to 
+access some stylesheet stored in other system, in body we 've navbar, 1st class is used for creating the navigation bar, navbar-inverse
+to look better on our site,we created a div class so that navigation bar will occupy the entire page & will fit according to the page's
+ width, next, we created a div c = navabar-header, for the header i.e Home, navbar-brand, other element we include in our navigation 
+ bar we put them as list elements to the right of nav., next, we created a link Register, but we 've not created the url, at the right 
+ corner we want , we want to extract the current user of our website, using request.user,.
+ 
+ We want the navbar to be present in multiple pages hence, by defining below {%block content%} & {%endblock%}, it's basically the content
+ that would fall in each of the pages, next we goto genretemplate.html & simply include base template there, all the instructions to 
+ create genretemplate page will come under a block, bcos of {%endblock%} written., we goto our html pages, at the top we extends the 
+ base.html, in body we add, the instructions within the body will be the content of the block {% block content%}, at bottom {%endblock%},
+ we do the same in detailtemplate.html, hence, we have the navigation bar present in every page., next we created a form so that we can 
+ 've users register, we created 3rd url in genre/urls.py, in this page http://localhost:8000/admin/auth/user/  , there is a table we 
+ would use to store our usernames, email, pass..,  we will use the basic form to create the blue print, in main genre folder create a 
+ file forms.py', in that file we import that table we saw in admin DB, we impor models form, created UserForm(forms.ModelForm) class 
+ which will import from .ModelForm, next, created a class Meta= means definition or description of class, inside we give a model name 
+ user, the we specified the fields we would use, at top we specify the pass type, from that line django knows we need to take the hash
+  value not the user i/p charc. , next we goto views, after generic impor, import UserForm, authen.. login,, View  and created a class 
+  for UserFormView, & pass the obj. view, we defined a class for the form UserForm, next, template_name, next, we get, defined the get
+  func. with req in, 1st u provide an empty form, return the obj. through render func., it sends out http req, temp_name, form dict.,
+
+  In post, we pss self & req, wen D user enter data and enter, Post is called, the data will be stored in POST variable, next, POST 
+  func. checks if the data entered by the user is valid, if valid, the data is saved in a shell, if it's cleaned then we save it in DB 
+  save the data, django provide DB for users for storin that is where we will be storing the data received, we get the cleaned version 
+  of the data and store them in username, pass, you pass the pass in diff. way, user.set_password(password), user.save()
+
+  Next, created an obj. newuser, the obj. will call a user if username. & pass to authenticate() func. is valid & match, next, check if
+  the user exist is not none, check the status, if newuser is active, login, return the user to D index page, we use a func. redirect, 
+  we 1st import it at top, if user not authenticated return render(request, self...)
+
+  Next, created formtemplate.html, !st we include navigation bar from the base.html, using, {%%}, extends, block content, endblock,
+  created a form, whenever u use an interactive form in django make sure to include "csrf" token  to prevent malicious attack from Cross
+  site through visitors browser to ur server, make sure u provide it whenever u 've a post method & u 're not redirecting or using an 
+  external url., complete the form structure, we uncoomented the 3rd url, & modified it.
+
+
+ {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Piece</title>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse"> 
+        <div class="container-fluid">
+            <div class="navbar-header">
+            <a class="navbar-brand" href="/genre">Home</a>
+        </div>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li class="">
+                <a href="/genre/register/">
+                    Register
+                </a>
+            </li>
+            <li class="">
+                <a>{{request.user}}</a>
+            </li>
+        </ul>
+    </div>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

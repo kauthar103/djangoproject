@@ -1,0 +1,45 @@
+{% extends 'genre/base.html' %}
+
+{% comment %}In genretemplate.html, The above must be in first line, we give a name genreobj to loop in all_collection we need to display
+ our objs. passed 4rm views folder,wen the queryset in views for index class pass an obj. is received by the template file in variable 
+ named object_list,. To inser python code in HTML put the code in {% %}, below is python code, genreobj is the obj. where all the objs. 
+ from collection table are stored 1 by 1,  now we define how the genre will be displayed, we want the image of that particular genre 2 
+ be displayed, which we 've stored in 1 of the variables, the link of D img has been stored in Db collcover, we format it with W & H, 
+ everytime you are accessing or displaying just the value u insert it in {{}},  below the img, 
+    
+    we want the name of the genre to be displayed, the name should be clickable, we insert the url of the page the user should be taken 
+    2, that url is wat we dfined in genre->urls.py, #genre/1, copy the url from there put it in {{}}, then D name that would be 
+    displayed, finally we 've the description to be displayed, once the user clicks on it we can move to another page, below the name we
+     want d description 2 be displayed, we end the python code with {% end for %} 
+     
+Wen the user enters the url/genre, django will 1st check the main url page, it has matched, the action for it is include the genre.urls,
+it goes and includes it, in the genre/urls page a func. is defined as a response for that particular url, it goes to the views file, in
+the views file we 've defined our funcs. we collect all the objs. in our collection table we convert it into our dic. so that is 
+iterable, then we pass it using the render func. , the render func. will take ur template and will tie that along wit the context i.e 
+dic. , it will pass a res obj. to our HTML file , called object.list which is iterable, it will iterate through the obj, display each 
+obj. in a formatted way, then render func. will pass this obj. all_collection to our template, in the HTML for loop we iterate over the 
+all collection which is the dic. , using the HTML code we print out the objs. in all collection, in a 
+formatted way ' {% endcomment %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genre</title>
+</head>
+<body>
+{% block content %}
+    {% for genreobj in object_list %}
+        <div align="center">
+         <img src="{{ genreobj.collcover }}" height="200" width="200">  
+         <h2><a href="/genre/{{id}}/">{{ genreobj.collection_name }}</a></h2>
+         <h3>{{ genreobj.description }}</h3>
+         <br/>
+        </div>
+    {% endfor %}
+
+{% endblock %}
+</body>
+</html>

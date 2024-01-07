@@ -1,0 +1,28 @@
+{% extends 'genre/base.html' %}
+
+{% comment %}The above must be in first line, This is the final webPage we 're not re-directing from from here, we copied the code from 
+genretemplate & editted it here, we give a name pieceobj to loop in in the value collection.piece_set.all, this will return all the
+ pieces related 2 that collection, we removed href here, the value here  {% endcomment %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Piece</title>
+</head>
+<body>
+{% block content %}
+    {% for pieceobj in collection.piece_set.all %}
+        <div align="center">
+         <img src="{{ pieceobj.piececover }}" height="200" width="200">  
+         <h2>{{ pieceobj.title }} - {{pieceobj.artist}}</h2>
+         <h3>{{ pieceobj.type }}</h3>
+         <h3>{{ pieceobj.year }}</h3>
+         <br/>
+        </div>
+    {% endfor %}
+
+{% endblock %}
+</body>
+</html>

@@ -13,3 +13,5 @@ Procedure:
 - Step 7: Now goto the directory where you crated your project in cmd type python manage.py startapp genre. A new folder with the name genre will be
 - created, inside the folder we have migration folder, inside it there will be a number of files, anytime we execute a particular command a
 - new file is inserted into the migration folder, this basically connects ur database to the source code.
+- Step 8: Clone the repository
+- Step 9: Open the directory in CMD and type python manage.py runserver to run the project

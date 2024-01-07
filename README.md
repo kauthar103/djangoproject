@@ -1,6 +1,6 @@
-##This is a genre website, I utilized django framework to build this website.
-##We want all the genre to be displayed on the 1st page, we will have a frontpage with 3 or 4 genre, 
-##within each genres, within each genre you will have a piece that is an article, poem, or novel of that particular genre, when the user clicks
+###This is a genre website, I utilized django framework to build this website.
+###We want all the genre to be displayed on the 1st page, we will have a frontpage with 3 or 4 genre, 
+###within each genres, within each genre you will have a piece that is an article, poem, or novel of that particular genre, when the user clicks
 the 1st page, it will move to the next page.
 
 Procedure:
